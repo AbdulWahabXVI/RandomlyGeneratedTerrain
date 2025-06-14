@@ -147,10 +147,10 @@ public:
         for (int y = 0; y < baseSize; y++) {
             for (int x = 0; x < baseSize; x++) {
                 if (
-                    x + y > (((baseSize + baseSize) / 2 - 1) / 2) &&
-                    x + y <= (((baseSize + baseSize) / 2 - 1) * 1.5) &&
-                    x - y < (((baseSize + baseSize) / 2 - 1) / 2) &&
-                    x - y >= -(((baseSize + baseSize) / 2 - 1) / 2)
+                    x + y > ((baseSize - 1) / 2) &&
+                    x + y <= ((baseSize - 1) * 1.5) &&
+                    x - y < ((baseSize - 1) / 2) &&
+                    x - y >= -((baseSize - 1) / 2)
                     ) {
                     tempArr[x][y] = arr[x - (((baseSize - 1) / 2) - y)][y + (((baseSize - 1) / 2) - x)];
                 }
@@ -348,7 +348,7 @@ void screenShot(RenderWindow& window) {
     }
 }
 
-void mapWindow(int seedText, int baseSize) {
+void mapWindow(int seedText = 1248, int baseSize = 128) {
     //Initialization
     RenderWindow window(VideoMode(screenSize, screenSize), "The Game!");
 
@@ -507,7 +507,7 @@ int main() {
                 int seed;
                 cout << "Enter Seed for Map Generation (or -1 to quit): ";
                 cin >> seed;
-                if (seed < 0) throw invalid_argument("Seed can't be negative");
+                if (seed < 0) mapWindow();
                 if (cin.fail()) {
                     cin.clear();
                     cin.ignore(10000, '\n');
